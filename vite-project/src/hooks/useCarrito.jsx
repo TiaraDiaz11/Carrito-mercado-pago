@@ -1,7 +1,4 @@
-// importa herramientas de React:
 import { useEffect, useMemo, useState } from "react";
-
-// Hook personalizado para separar por archivo la logica en vez de toda junta en el app.jsx
 export default function useCarrito() {
 
 // Estado del carrito
