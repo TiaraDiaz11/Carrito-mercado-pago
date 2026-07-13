@@ -80,7 +80,11 @@ function App() {
                 <div className="cart-total">
                   <h3>Total: ${totalCarrito}</h3>
                 </div>
-                <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar carrito</button>
+                <div>
+                  <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar carrito</button>
+                  <button className="comprar-btn" onClick={}>Comprar</button>
+                </div>
+                
               </>
 
             )}
