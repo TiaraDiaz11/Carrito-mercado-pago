@@ -6,15 +6,24 @@ import mercadopago
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
 app = FastAPI()
 
-class Item(BaseModel):
-    id: int
-    cantidad: int
+origins = [
+    "http://localhost:5173"
+
+]
+
+class ItemCarrito(BaseModel):
+    id: Union[int, str]
+    title: str
+    unit_price: float
+    quantity: int
 
 
 class Carrito(BaseModel):
-    items: List[Item]
+    items: List[ItemCarrito]
+    user: str
 
 
 @app.get("/")

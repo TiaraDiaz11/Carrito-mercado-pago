@@ -3,13 +3,13 @@ export default function useCarrito() {
 
 // Estado del carrito
   const [carrito, setCarrito] = useState(() => {
-    const guardado = localStorage.getItem("carrito");
+    const guardado = localStorage.getItem("carritoItem");
     return guardado ? JSON.parse(guardado) : [];
   });
 
 // Guardar cambios automaticamente
   useEffect(() => {
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    localStorage.setItem("carritoItem", JSON.stringify(carrito));
   }, [carrito]);
 
 // Agregar producto
@@ -69,7 +69,7 @@ export default function useCarrito() {
     setCarrito([]);
   };
 
-// Retronar funciones para que el App.jsx pueda llamar a cada una
+// Retornar funciones para que el App.jsx pueda llamar a cada una
   return {
     carrito,
     agregarAlCarrito,

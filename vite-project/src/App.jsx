@@ -1,10 +1,11 @@
 import { useState } from "react";
 import useProductos from "./hooks/useProductos";
 import useCarrito from "./hooks/useCarrito";
+import useBackend from "./hooks/useBackend";
 
 function App() {
   const { productos, cargando } = useProductos();
-
+  const {enviarBackend} = useBackend();
   const {
     carrito,
     agregarAlCarrito,
@@ -41,7 +42,7 @@ function App() {
             <h2>{producto.title}</h2>
             <p>{producto.category}</p>
             <strong><p>stock: {producto.stock}</p></strong>
-            <p cSlassName="precio">${producto.price}</p>
+            <p className="precio">${producto.price}</p>
             <button onClick={() => agregarProducto(producto)}>Agregar al carrito</button>
           </div>
         ))}
@@ -82,7 +83,7 @@ function App() {
                 </div>
                 <div>
                   <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar carrito</button>
-                  <button className="comprar-btn" onClick={}>Comprar</button>
+                  <button className="comprar-btn" onClick={() => enviarBackend(carrito,"TianTest")}>Comprar</button>
                 </div>
                 
               </>
