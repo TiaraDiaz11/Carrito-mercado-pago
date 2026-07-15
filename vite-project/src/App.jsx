@@ -2,6 +2,7 @@ import { useState } from "react";
 import useProductos from "./hooks/useProductos";
 import useCarrito from "./hooks/useCarrito";
 import useBackend from "./hooks/useBackend";
+import MercadoButton from "./hooks/MercadoButton";
 
 function App() {
   const { productos, cargando } = useProductos();
@@ -19,6 +20,15 @@ function App() {
 
 
   const [abrirCarrito, setAbrirCarrito] = useState(false);
+  const [preferenceId, setPreferenceId] = useState(null);
+
+  const comprar = async () => {
+    const id = await enviarBackend(carrito, "TianTest");
+
+    console.log("Preference ID:", id);
+
+    setPreferenceId(id);
+}
 
   const agregarProducto = (producto) => {
     agregarAlCarrito(producto);
@@ -83,7 +93,8 @@ function App() {
                 </div>
                 <div>
                   <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar carrito</button>
-                  <button className="comprar-btn" onClick={() => enviarBackend(carrito,"TianTest")}>Comprar</button>
+                  <button className="comprar-btn" onClick={comprar}> Comprar </button>
+                  {preferenceId && ( <MercadoButton preferenceId={preferenceId} />)}
                 </div>
                 
               </>

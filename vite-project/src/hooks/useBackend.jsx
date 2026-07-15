@@ -11,7 +11,7 @@ export default function useBackend() {
         try {
             console.log("Enviando al backend...");
 
-            const res = await axios.post("http://localhost:8000/crear-preferencia", {
+            const res = await axios.post("http://localhost:8000/carrito", {
                 items: parseCarrito,
                 user: user
             });
@@ -19,16 +19,10 @@ export default function useBackend() {
             // 2. Imprimimos exactamente qué nos devolvió Axios
             console.log("Respuesta de Axios:", res);
 
-            // 3. Verificamos la ruta de los datos
-            const urlPago = res.data.sandbox_init_point;
-            console.log("URL de redirección:", urlPago);
-
-            // 4. Solo redirigimos si la URL existe de verdad
-            if (urlPago) {
-                window.location.href = urlPago;
-            } else {
-                console.error("Atención: El backend no devolvió el sandbox_init_point", res.data);
-            }
+            const preferenceId = res.data.id;
+            console.log("Preference ID:", preferenceId);
+            
+            return preferenceId;
 
         } catch (error) {
             console.error("Error en la petición:", error);
