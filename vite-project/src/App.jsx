@@ -4,10 +4,10 @@ import useCarrito from "./hooks/useCarrito";
 import useBackend from "./hooks/useBackend";
 import MercadoButton from "./hooks/MercadoButton";
 
-function App() {
-  const { productos, cargando } = useProductos();
-  const {enviarBackend} = useBackend();
-  const {
+function App() { //Componente principal
+  const { productos, cargando } = useProductos(); //Trae
+  const {enviarBackend} = useBackend(); //Conecta
+  const { //Funciones
     carrito,
     agregarAlCarrito,
     eliminarDelCarrito,
@@ -18,13 +18,12 @@ function App() {
     vaciarCarrito,
   } = useCarrito();
 
+  const [abrirCarrito, setAbrirCarrito] = useState(false); // Guarda si el carrito esta abierto
+  const [preferenceId, setPreferenceId] = useState(null); // Guarda el id q devuelve mercadopago
+  const [mostrarPago, setMostrarPago] = useState(false); //Guarda si se muestra el modal de pago
+  const [abrirCategorias, setAbrirCategorias] = useState(false); // si esta abierto el menu de categorias
 
-  const [abrirCarrito, setAbrirCarrito] = useState(false);
-  const [preferenceId, setPreferenceId] = useState(null);
-  const [mostrarPago, setMostrarPago] = useState(false);
-  const [abrirCategorias, setAbrirCategorias] = useState(false);
-
-  const comprar = async () => {
+  const comprar = async () => { //Funcion asincrona que espera la respuesta del backend
     const id = await enviarBackend(carrito, "TianTest");
 
     console.log("Preference ID:", id);
@@ -65,7 +64,7 @@ function App() {
       {abrirCarrito && (
 
         <div className="cart-overlay" onClick={() => setAbrirCarrito(false)}>
-          <div className="cart-panel" onClick={(e)=>e.stopPropagation()}>
+          <div className="cart-panel" onClick={(e)=>e.stopPropagation()}>//Detiene la propagacion del event
 
             {carrito.map((item)=>(
               
@@ -119,6 +118,7 @@ function App() {
               <li>Ofertas</li>
               <li>Novedades</li>
             </ul>
+
           </div>
         </div>
       )}

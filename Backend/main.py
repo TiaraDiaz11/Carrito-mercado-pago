@@ -19,7 +19,6 @@ class ItemCarrito(BaseModel):
     unit_price: float
     quantity: int
 
-
 class Carrito(BaseModel):
     items: List[ItemCarrito]
     user: str
@@ -29,7 +28,7 @@ origins = [
 ]
 
 app.add_middleware(
-    CORSMiddleware,
+    CORSMiddleware,              # Cors mecanismo de seguridad
     allow_origins=origins,       # Permite solicitudes de estos dominios
     allow_credentials=True,      # Permite cookies y encabezados de autenticación
     allow_methods=["*"],         # Permite todos los métodos (GET, POST, PUT, DELETE, etc.)

@@ -24,11 +24,8 @@ export default function useProductos(){
     return {productos, cargando}
 
 }
-
-//Este es un hook personalizado llamado useProductos
-//Se encarga de obtener los productos desde una API usando fetch
 // Primero crea un estado para guardar los productos y otro para saber si la información sigue cargando
-//Cuando el componente se monta, useEffect realiza la petición a la API
-//Convierte la respuesta a JSON y guarda el arreglo de productos con setProductos
-//Finalmente cambia el estado de carga a false
-//Devuelve los productos junto con el indicador de carga para que cualquier componente pueda utilizarlos
+// Cuando el componente se monta, useEffect realiza la petición a la API
+// Convierte la respuesta a JSON y guarda el arreglo de productos con setProductos
+// Finalmente cambia el estado de carga a false
+// Devuelve los productos junto con el indicador de carga para que cualquier componente pueda utilizarlos
