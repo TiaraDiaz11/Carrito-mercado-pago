@@ -56,6 +56,7 @@ def post_carrito(carrito: Carrito):
         ]
     }
     preference_response = sdk.preference().create(preference_data)
+
     preference = preference_response["response"]
     return {
         "id": preference["id"],

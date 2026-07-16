@@ -21,6 +21,8 @@ function App() {
 
   const [abrirCarrito, setAbrirCarrito] = useState(false);
   const [preferenceId, setPreferenceId] = useState(null);
+  const [mostrarPago, setMostrarPago] = useState(false);
+  const [abrirCategorias, setAbrirCategorias] = useState(false);
 
   const comprar = async () => {
     const id = await enviarBackend(carrito, "TianTest");
@@ -28,6 +30,7 @@ function App() {
     console.log("Preference ID:", id);
 
     setPreferenceId(id);
+    setMostrarPago(true);
 }
 
   const agregarProducto = (producto) => {
@@ -40,8 +43,8 @@ function App() {
   return (
 
     <div className="app">
-      <button className="cart-btn" data-count={cantidadTotal} onClick={() =>
-      setAbrirCarrito(true)}>🛒</button>
+      <button className="category-btn" onClick={() => setAbrirCategorias(true)}>☰</button>
+      <button className="cart-btn" data-count={cantidadTotal} onClick={() => setAbrirCarrito(true)}>🛒</button>
       <h1>Catálogo de productos</h1>
 
       <div className="productos-grid">
@@ -91,16 +94,42 @@ function App() {
                 <div className="cart-total">
                   <h3>Total: ${totalCarrito}</h3>
                 </div>
-                <div>
+                <div className="botones-carrito">
                   <button className="vaciar-btn" onClick={vaciarCarrito}>Vaciar carrito</button>
-                  <button className="comprar-btn" onClick={comprar}> Comprar </button>
-                  {preferenceId && ( <MercadoButton preferenceId={preferenceId} />)}
+                  <button className="comprar-btn" onClick={comprar}>Comprar</button>
                 </div>
                 
               </>
 
             )}
 
+          </div>
+        </div>
+      )}
+      
+      {abrirCategorias && (
+        <div className="category-overlay" onClick={() => setAbrirCategorias(false)}>
+          <div className="category-panel" onClick={(e)=>e.stopPropagation()}>
+            
+            <h2>Categorías</h2>
+            
+            <ul>
+              <li>Perfumes</li>
+              <li>Cosméticos</li>
+              <li>Ofertas</li>
+              <li>Novedades</li>
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {mostrarPago && preferenceId && (
+        <div className="modal-overlay" onClick={() => setMostrarPago(false)}>
+          <div className="modal-pago" onClick={(e)=>e.stopPropagation()}>
+            
+            <button className="cerrar-modal" onClick={() => setMostrarPago(false)}>X</button>
+            
+            <MercadoButton preferenceId={preferenceId}/>
           </div>
         </div>
       )}
